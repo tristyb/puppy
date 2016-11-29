@@ -34,14 +34,12 @@ cd path/to/project
 npm run build [-- [--no-minification] [--no-critical-css]]
 ```
 The output will be located in `dist` folder
-
 Serving
 -------
 To serve the built assets locally, use:
 ```
 npm run serve
 ```
-
 Updating
 --------
 Before building a new version of the project, don't forget to update the dependencies if any were added.
@@ -49,17 +47,20 @@ Before building a new version of the project, don't forget to update the depende
 cd path/to/project
 npm run update-deps
 ```
-
 Styleguides
 -----------
-The living style guide is employed in the project. Refer to [Styledown](https://github.com/styledown/styledown)
+The living style guide is employed in the project. Refer to [Styledown](https://holidaypirates.github.io/nucleus/getting-started.html)
 documentation for more information.
-To generate the styleguide, use:
+To generate the styleguide, first make sure that nucleus is installed globally on your system:
+```
+npm i -g nucleus-styleguide
+```
+Then use:
 ```
 cd path/to/project
 npm run styleguide
 ```
-The generated styleguide will be available at `dist/styleguide`
+The generated styleguide will be available at `dist/styleguide`. When the project is built this will be automatically ran too so it gets deployed etc.
 
 Deploying (optional)
 --------------------

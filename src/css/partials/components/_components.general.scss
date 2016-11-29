@@ -8,6 +8,15 @@ body {
 	margin: 0;
 	font-family: $font--main;
 }
+/**
+ * @atom Headings
+ * @section Typograhpy
+ * @markup
+ *   <h1>Some heading</h1>
+ *   <h2>Some other heading</h2>
+ *   <h3>Some heading</h3>
+ *   <h4>Some other heading</h4>
+ */
 h1,
 h2,
 h3,
@@ -24,4 +33,3 @@ a {
 	text-decoration: none;
 	color: $color--brand;
 }
-

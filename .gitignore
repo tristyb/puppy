@@ -8,3 +8,4 @@ jspm_packages
 test/bower_components
 localhost.*
 npm-debug.log
+styleguide
