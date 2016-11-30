@@ -1,8 +1,8 @@
 {
   "title": "Nucleus",
   "files": ["src/**/*.scss"],
-  "target": "styleguide",
-  "css": "styles/main.css",
+  "css": "REPLACE",
+  "target": "dist/styleguide",
   "namespace": "page",
   "verbose": 3,
   "counterCSS": null,

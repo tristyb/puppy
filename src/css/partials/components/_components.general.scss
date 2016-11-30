@@ -10,12 +10,14 @@ body {
 }
 /**
  * @atom Headings
- * @section Typograhpy
+ * @section Typography
  * @markup
- *   <h1>Some heading</h1>
- *   <h2>Some other heading</h2>
- *   <h3>Some heading</h3>
- *   <h4>Some other heading</h4>
+ *   <h1>Heading level 1</h1>
+ *   <h2>Heading level 2</h2>
+ *   <h3>Heading level 3</h3>
+ *   <h4>Heading level 4</h4>
+ *   <h5>Heading level 5</h5>
+ *   <h6>Heading level 6</h6>
  */
 h1,
 h2,
@@ -23,6 +25,16 @@ h3,
 h4 {
 	font-family: $font--title;
 }
+/**
+  * @atom Unordered List
+  * @section Typography > Lists
+  * @markup
+  *   <ul>
+  *     <li>List item 1</li>
+  *     <li>List item 2</li>
+  *     <li>List item 3</li>
+  *   </ul>
+  */
 ul {
 	padding-left: 1.5rem;
 }

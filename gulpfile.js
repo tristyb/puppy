@@ -1,5 +1,6 @@
 'use strict'
 
+const cp = require('child_process');
 const autoprefixer = require('autoprefixer');
 const browserSync = require('browser-sync');
 const cache = require('gulp-cache');
@@ -63,12 +64,6 @@ gulp.task('copy:index', () => {
   return gulp
     .src(`${options.src}/index/**/*`)
     .pipe(gulp.dest(options.dist))
-});
-
-gulp.task('copy:styleguide', () => {
-  return gulp
-    .src(`styleguide/**/*`)
-    .pipe(gulp.dest(`${options.dist}/styleguide`))
 });
 
 gulp.task('favicons', () => {
@@ -436,11 +431,27 @@ gulp.task('clean:unrevved', () => {
   ])
 });
 
+gulp.task('insert:styleguide', () => {
+  let css = gulp.src([`${options.dist}/assets/css/**/*.css`], {read: false});
+
+  return gulp
+    .src(`${options.dist}/styleguide/*.html`)
+    .pipe(injectString.replace('<link href="REPLACE" rel="stylesheet">', '<!-- inject:css --><!-- endinject -->'))
+    .pipe(inject(css, {relative:true}))
+    .pipe(gulp.dest(`${options.dist}/styleguide/`));
+});
+
+gulp.task('styleguide', () => {
+  return gulp.src('config.nucleus.json', {read: false})
+  .pipe(shell([
+    `nucleus --config config.nucleus.json`
+  ]))
+});
+
 gulp.task('build:production', gulp.series(
   'clean',
   gulp.parallel(
     'copy:index',
-    'copy:styleguide',
     'favicons',
     'safari',
     'fonts',
@@ -452,35 +463,14 @@ gulp.task('build:production', gulp.series(
     'svgstore',
     'templates'
   ),
+  'styleguide',
   'rev',
   'clean:unrevved',
   'inject:critical',
+  'insert:styleguide',
   'inject:assets',
   'favicons:inject'
 ));
-
-/* STYLEGUIDE */
-
-gulp.task('styles:styleguide', () => {
-  let output = `styleguide/styles`;
-  let sassOptions = {
-    errLogToConsole: true,
-    outputStyle: 'expanded'
-  };
-  let processors = [
-    autoprefixer({browsers: ['last 2 versions', '> 5%']}),
-    inlineSvg(),
-    svgo(),
-  ];
-  if (args.minify && !isDevelopment) { processors.push(cssnano) }
-  return gulp
-    .src(`${options.src}/css/main.scss`)
-    .pipe(gulpif(isDevelopment,sourcemaps.init()))
-      .pipe(sass(sass(sassOptions).on('error', sass.logError)))
-      .pipe(postcss(processors))
-    .pipe(gulpif(isDevelopment,sourcemaps.write()))
-    .pipe(gulp.dest(output));
-});
 
 gulp.task('serve',
   gulp.series(
