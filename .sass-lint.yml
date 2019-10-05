@@ -4,13 +4,13 @@ options:
 rules:
   class-name-format:
     - 1
-    -
-      allow-leading-underscore: false
+    - allow-leading-underscore: false
       convention: 'hyphenatedbem'
   indentation: 0
   no-css-comments: 0
   no-qualifying-elements:
     - 1
-    -
-      allow-element-with-attribute: true
-  property-sort-order: 0
+    - allow-element-with-attribute: true
+  property-sort-order:
+    - 1
+    - order: 'smacss'
